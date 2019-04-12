@@ -1,15 +1,16 @@
+require 'pry'
+
 def reformat_languages(languages)
   new_hash = {}
   
-  languages.each do |style|
-    style[1].each do |language|
-      new_hash[language[0]] = language[1]
-      new_hash[language[0]][:style] = []
+  languages.each do |style, language_hash|
+    language_hash.each do |language, type_hash|
+      new_hash[language] = type_hash
+      new_hash[language][:style] = []
     end
   end
-  
-  languages.each do |style| 
-    style[1].each { |language| new_hash[language[0]][:style] << style[0] } 
+  languages.each do |style, language_hash| 
+    language_hash.each { |language, type_hash| new_hash[language][:style] << style } 
   end
   
   new_hash
